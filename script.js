@@ -80,12 +80,8 @@
           el.classList.remove('out-view');
         }, delay);
       } else {
-        // Reverse animation when scrolled back up
-        const rect = entry.boundingClientRect;
-        if (rect.top > 0) {           // exiting from top (scrolling up)
-          el.classList.remove('in-view');
-          el.classList.add('out-view');
-        }
+        el.classList.remove('in-view');
+        el.classList.add('out-view');
       }
     });
   }, {
@@ -277,11 +273,12 @@
 
     // Simulate submission
     const btn = form.querySelector('.btn-primary');
-    btn.textContent = 'Sending…';
+    const btnText = btn.querySelector('.btn-text');
+    btnText.textContent = 'Sending…';
     btn.disabled = true;
 
     setTimeout(() => {
-      btn.textContent = 'Send Message 🌿';
+      btnText.textContent = 'Send Message';
       btn.disabled = false;
       form.reset();
       success.classList.add('show');
@@ -379,6 +376,30 @@
   window.addEventListener('scroll', onScroll, { passive: true });
 })();
 
+
+/* ── Product gallery scroll rotation ─────────────────── */
+(function initProductGallery() {
+  const wrapper = document.getElementById('productGallery');
+  if (!wrapper) return;
+
+  const cards = Array.from(wrapper.children);
+  wrapper.style.setProperty('--cards', cards.length);
+  cards.forEach((card, index) => {
+    card.style.setProperty('--card-i', index + 1);
+  });
+
+  const section = wrapper.closest('.product-showcase');
+  const updateRotate = () => {
+    if (!section) return;
+    const rect = section.getBoundingClientRect();
+    const progress = Math.min(Math.max((window.innerHeight - rect.top) / (window.innerHeight + rect.height), 0), 1);
+    wrapper.style.setProperty('--rotate', progress.toFixed(4));
+  };
+
+  window.addEventListener('scroll', updateRotate, { passive: true });
+  window.addEventListener('resize', updateRotate);
+  updateRotate();
+})();
 
 /* ── Smooth scroll for anchor links (Safari fallback) ── */
 (function smoothScroll() {

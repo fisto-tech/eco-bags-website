@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -17,7 +18,7 @@
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#home" class="logo">
-        <span class="logo-icon">🌿</span>
+        <span class="logo-icon material-symbols-rounded">eco</span>
         <span class="logo-text">Green<span class="logo-accent">Wrap</span></span>
       </a>
       <ul class="nav-links" id="navLinks">
@@ -44,7 +45,6 @@
 
     <div class="hero-content">
       <div class="hero-text" data-anim="fade-left">
-        <span class="hero-badge">🌍 Earth-First Packaging</span>
         <h1 class="hero-heading">
           Sustainable Packaging<br />
           <span class="hero-highlight">for a Greener Future</span>
@@ -67,19 +67,20 @@
 
       <div class="hero-visual" data-anim="fade-right">
         <div class="hero-img-wrap">
-          <video class="hero-video" autoplay muted loop playsinline preload="auto">
-            <source src="images/home-page-video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+            <video class="hero-video" autoplay muted loop playsinline preload="auto">
+              <source src="images/home-page-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+        
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="hero-scroll" data-anim="fade-up">
-      <span>Scroll to explore</span>
-      <div class="scroll-dot"></div>
-    </div>
-  </section>
+      <div class="hero-scroll" data-anim="fade-up">
+        <span>Scroll to explore</span>
+        <div class="scroll-dot"></div>
+      </div>
+    </section>
 
   <!-- ===== ABOUT ===== -->
   <section class="about section" id="about">
@@ -99,7 +100,7 @@
         </div>
 
         <div class="about-content" data-anim="fade-left">
-          <span class="section-eyebrow">Who We Are</span>
+          <!-- <span class="section-eyebrow">Who We Are</span> -->
           <h2 class="section-title">Pioneering Sustainable Packaging Since 2009</h2>
           <p class="about-para">
             GreenWrap was founded on a simple belief: packaging should never cost the earth more than it's worth. We partner with food businesses, restaurants, and retailers to replace single-use plastic with beautiful, functional, and fully compostable alternatives.
@@ -142,74 +143,79 @@
         <p class="section-sub">Every product is made from renewable materials, certified food-safe, and designed to return to nature.</p>
       </div>
 
-      <div class="products-grid">
-        <div class="product-card" data-anim="fade-right" data-delay="0">
-          <div class="product-img-wrap">
-            <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&q=75&auto=format&fit=crop" alt="Paper Food Container" />
-            <div class="product-tag">Bestseller</div>
+      <div class="product-showcase" data-anim="fade-up">
+        <section class="wrapper" id="productGallery">
+          <div data-title="A misty Morning">
+            <img src="https://picsum.photos/id/634/1200/1200" alt="A misty Morning" />
           </div>
-          <div class="product-info">
-            <h3>Paper Food Container</h3>
-            <p>Leak-resistant, grease-proof containers for curries, rice, and takeaway meals. Made from virgin kraft paper.</p>
-            <a href="#contact" class="product-cta">Get Quote →</a>
+          <div data-title="Harvest">
+            <img src="https://picsum.photos/id/228/1200/1200" alt="Harvest" />
           </div>
-        </div>
+          <div data-title="Waiting">
+            <img src="https://picsum.photos/id/661/1200/1200" alt="Waiting" />
+          </div>
+          <div data-title="Time for Everything">
+            <img src="https://picsum.photos/id/380/1200/1200" alt="Time for Everything" />
+          </div>
+          <div data-title="Cross over">
+            <img src="https://picsum.photos/id/392/1200/1200" alt="Cross over" />
+          </div>
+          <div data-title="In The City">
+            <img src="https://picsum.photos/id/238/1200/1200" alt="In The City" />
+          </div>
+          <div data-title="A Boat Trip">
+            <img src="https://picsum.photos/id/469/1200/1200" alt="A Boat Trip" />
+          </div>
+          <div data-title="Waiting">
+            <img src="https://picsum.photos/id/311/1200/1200" alt="Waiting" />
+          </div>
+          <div data-title="Stories to tell">
+            <img src="https://picsum.photos/id/515/1200/1200" alt="Stories to tell" />
+          </div>
+          <div data-title="A Perfect Day">
+            <img src="https://picsum.photos/id/521/1200/1200" alt="A Perfect Day" />
+          </div>
+          <div data-title="Riding the Curve">
+            <img src="https://picsum.photos/id/549/1200/1200" alt="Riding the Curve" />
+          </div>
+          <div data-title="Raindrops">
+            <img src="https://picsum.photos/id/178/1200/1200" alt="Raindrops" />
+          </div>
+          <div data-title="Gone Sailing">
+            <img src="https://picsum.photos/id/637/1200/1200" alt="Gone Sailing" />
+          </div>
+          <div data-title="The Watch Tower">
+            <img src="https://picsum.photos/id/641/1200/1200" alt="The Watch Tower" />
+          </div>
+          <div data-title="Leaving">
+            <img src="https://picsum.photos/id/669/1200/1200" alt="Leaving" />
+          </div>
+          <div data-title="Above the Clouds">
+            <img src="https://picsum.photos/id/685/1200/1200" alt="Above the Clouds" />
+          </div>
+          <div data-title="This is the title">
+            <img src="https://picsum.photos/id/505/1200/1200" alt="This is the title" />
+          </div>
+          <div data-title="This is the title">
+            <img src="https://picsum.photos/id/699/1200/1200" alt="This is the title" />
+          </div>
+          <div data-title="This is the title">
+            <img src="https://picsum.photos/id/513/1200/1200" alt="This is the title" />
+          </div>
+          <div data-title="Contemplation!">
+            <img src="https://picsum.photos/id/773/1200/1200" alt="Contemplation!" />
+          </div>
+        </section>
 
-        <div class="product-card" data-anim="fade-left" data-delay="100">
-          <div class="product-img-wrap">
-            <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&q=75&auto=format&fit=crop" alt="Biodegradable Box" />
-            <div class="product-tag">New</div>
-          </div>
-          <div class="product-info">
-            <h3>Biodegradable Box</h3>
-            <p>Sturdy sugarcane bagasse boxes that fully decompose within 90 days. Perfect for meal kits and cloud kitchens.</p>
-            <a href="#contact" class="product-cta">Get Quote →</a>
-          </div>
-        </div>
-
-        <div class="product-card" data-anim="fade-right" data-delay="150">
-          <div class="product-img-wrap">
-            <img src="https://images.unsplash.com/photo-1591261730799-ee4e6c2d16d7?w=400&q=75&auto=format&fit=crop" alt="Kraft Carry Bag" />
-          </div>
-          <div class="product-info">
-            <h3>Kraft Carry Bag</h3>
-            <p>Durable brown kraft paper bags with twisted handles — the elegant plastic-free choice for restaurants and retail.</p>
-            <a href="#contact" class="product-cta">Get Quote →</a>
-          </div>
-        </div>
-
-        <div class="product-card" data-anim="fade-left" data-delay="200">
-          <div class="product-img-wrap">
-            <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&q=75&auto=format&fit=crop" alt="Paper Cup" />
-          </div>
-          <div class="product-info">
-            <h3>Paper Cup</h3>
-            <p>Single and double-wall paper cups with PLA coating. Hot or cold, they hold firm without sweating plastic into your beverage.</p>
-            <a href="#contact" class="product-cta">Get Quote →</a>
-          </div>
-        </div>
-
-        <div class="product-card" data-anim="fade-right" data-delay="250">
-          <div class="product-img-wrap">
-            <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=75&auto=format&fit=crop" alt="Food Tray" />
-          </div>
-          <div class="product-info">
-            <h3>Food Tray</h3>
-            <p>Bagasse and moulded pulp food trays, great for festivals, food courts, and airline catering. Microwave-safe.</p>
-            <a href="#contact" class="product-cta">Get Quote →</a>
-          </div>
-        </div>
-
-        <div class="product-card" data-anim="fade-left" data-delay="300">
-          <div class="product-img-wrap">
-            <img src="https://images.unsplash.com/photo-1605600659908-0ef719419d41?w=400&q=75&auto=format&fit=crop" alt="Compostable Packaging" />
-            <div class="product-tag">Eco Pick</div>
-          </div>
-          <div class="product-info">
-            <h3>Compostable Packaging</h3>
-            <p>PLA-lined wraps and pouches that are certified home-compostable. Ideal for bakeries, delis, and organic brands.</p>
-            <a href="#contact" class="product-cta">Get Quote →</a>
-          </div>
+        <div class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mouse">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M6 3m0 4a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-4a4 4 0 0 1 -4 -4z" />
+            <path d="M12 7l0 4" />
+            <path d="M8 26l4 4l4 -4">
+              <animateTransform attributeType="XML" attributeName="transform" type="translate" values="0 0; 0 4; 0 0" dur="1s" repeatCount="indefinite" />
+            </path>
+          </svg>
         </div>
       </div>
     </div>
@@ -224,22 +230,22 @@
       </div>
       <div class="why-grid">
         <div class="why-card" data-anim="scale-in" data-delay="0">
-          <div class="why-icon">🌿</div>
+          <div class="why-icon material-symbols-rounded">eco</div>
           <h3>Eco-Friendly Materials</h3>
           <p>We source only FSC-certified paper, bagasse, and PLA. No virgin plastic, ever.</p>
         </div>
         <div class="why-card" data-anim="scale-in" data-delay="100">
-          <div class="why-icon">✅</div>
+          <div class="why-icon material-symbols-rounded">verified</div>
           <h3>Food Safe Certified</h3>
           <p>FSSAI-compliant and BPA-free. Every batch is lab-tested before it leaves our floor.</p>
         </div>
         <div class="why-card" data-anim="scale-in" data-delay="200">
-          <div class="why-icon">💰</div>
+          <div class="why-icon material-symbols-rounded">monetization_on</div>
           <h3>Affordable Pricing</h3>
           <p>Bulk pricing tiers and no minimum order limit. Sustainable packaging without inflated margins.</p>
         </div>
         <div class="why-card" data-anim="scale-in" data-delay="300">
-          <div class="why-icon">🚚</div>
+          <div class="why-icon material-symbols-rounded">local_shipping</div>
           <h3>Fast Delivery</h3>
           <p>Pan-India logistics with 48-hour dispatch. Same-day delivery in Coimbatore and Chennai.</p>
         </div>
@@ -298,9 +304,13 @@
         </div>
 
         <div class="testimonial-controls">
-          <button class="tctrl-btn" id="prevBtn" aria-label="Previous">&#8592;</button>
+          <button class="tctrl-btn" id="prevBtn" aria-label="Previous">
+            <span class="material-symbols-rounded">chevron_left</span>
+          </button>
           <div class="tctrl-dots" id="tDots"></div>
-          <button class="tctrl-btn" id="nextBtn" aria-label="Next">&#8594;</button>
+          <button class="tctrl-btn" id="nextBtn" aria-label="Next">
+            <span class="material-symbols-rounded">chevron_right</span>
+          </button>
         </div>
       </div>
     </div>
@@ -336,28 +346,31 @@
               <label for="message">Message</label>
               <textarea id="message" name="message" rows="5" placeholder="Tell us about your packaging needs, quantities, or any questions…" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary btn-full">Send Message 🌿</button>
+            <button type="submit" class="btn btn-primary btn-full">
+              <span class="btn-text">Send Message</span>
+              <span class="material-symbols-rounded btn-icon">eco</span>
+            </button>
             <p class="form-success" id="formSuccess">Thanks! We'll get back to you within 24 hours.</p>
           </form>
         </div>
 
         <div class="contact-info-wrap" data-anim="fade-left">
           <div class="contact-info-block">
-            <div class="ci-icon">📍</div>
+            <div class="ci-icon material-symbols-rounded">location_on</div>
             <div>
               <strong>Our Office</strong>
               <p>No. 42, Green Industrial Estate,<br />Ganapathy, Coimbatore – 641 006,<br />Tamil Nadu, India</p>
             </div>
           </div>
           <div class="contact-info-block">
-            <div class="ci-icon">📞</div>
+            <div class="ci-icon material-symbols-rounded">phone</div>
             <div>
               <strong>Phone</strong>
               <p><a href="tel:+914222345678">+91 422 234 5678</a><br /><a href="tel:+919876543210">+91 98765 43210</a></p>
             </div>
           </div>
           <div class="contact-info-block">
-            <div class="ci-icon">✉️</div>
+            <div class="ci-icon material-symbols-rounded">email</div>
             <div>
               <strong>Email</strong>
               <p><a href="mailto:hello@greenwrap.in">hello@greenwrap.in</a><br /><a href="mailto:sales@greenwrap.in">sales@greenwrap.in</a></p>
@@ -384,7 +397,7 @@
       <div class="container footer-grid">
         <div class="footer-brand">
           <a href="#home" class="logo logo-light">
-            <span class="logo-icon">🌿</span>
+            <span class="logo-icon material-symbols-rounded">eco</span>
             <span class="logo-text">Green<span class="logo-accent-light">Wrap</span></span>
           </a>
           <p>Sustainable packaging solutions crafted for businesses that care about tomorrow.</p>
@@ -394,17 +407,6 @@
             <a href="#" aria-label="Twitter/X" class="social-btn">X</a>
             <a href="#" aria-label="LinkedIn" class="social-btn">Li</a>
           </div>
-        </div>
-
-        <div class="footer-col">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#testimonials">Testimonials</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
         </div>
 
         <div class="footer-col">
@@ -422,16 +424,16 @@
         <div class="footer-col">
           <h4>Certifications</h4>
           <ul>
-            <li>🌿 FSC Certified</li>
-            <li>✅ FSSAI Approved</li>
-            <li>♻️ Home Compostable</li>
-            <li>🏆 ISO 9001:2015</li>
+            <li><span class="list-icon material-symbols-rounded">eco</span> FSC Certified</li>
+            <li><span class="list-icon material-symbols-rounded">verified</span> FSSAI Approved</li>
+            <li><span class="list-icon material-symbols-rounded">recycling</span> Home Compostable</li>
+            <li><span class="list-icon material-symbols-rounded">military_tech</span> ISO 9001:2015</li>
           </ul>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 GreenWrap Packaging Pvt. Ltd. All rights reserved. Made with 🌍 love for the planet.</p>
+      <p>© 2025 GreenWrap Packaging Pvt. Ltd. All rights reserved. Made with <span class="material-symbols-rounded icon-inline">public</span> love for the planet.</p>
     </div>
   </footer>
 
