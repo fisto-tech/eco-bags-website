@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" fill="none">
+  <ellipse cx="120" cy="38" rx="100" ry="22" fill="#D4C4A8"/>
+  <path d="M25 38 Q20 120 55 155 Q120 175 185 155 Q220 120 215 38 Z" fill="#E8DCC8"/>
+  <path d="M25 38 Q20 120 55 155 Q120 175 185 155 Q220 120 215 38 Z" fill="url(#bowlGrad)" opacity=".5"/>
+  <ellipse cx="120" cy="38" rx="100" ry="22" fill="#C9B99A"/>
+  <defs>
+    <linearGradient id="bowlGrad" x1="120" y1="38" x2="120" y2="170" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F5EDE0"/>
+      <stop offset="100%" stop-color="#B8A88A"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -376,24 +376,71 @@
   window.addEventListener('scroll', onScroll, { passive: true });
 })();
 
-
 /* ── Product gallery scroll rotation ─────────────────── */
 (function initProductGallery() {
   const wrapper = document.getElementById('productGallery');
   if (!wrapper) return;
 
   const cards = Array.from(wrapper.children);
-  wrapper.style.setProperty('--cards', cards.length);
+  const total = cards.length;
+  wrapper.style.setProperty('--cards', total);
   cards.forEach((card, index) => {
     card.style.setProperty('--card-i', index + 1);
   });
 
-  const section = wrapper.closest('.product-showcase');
+  const section = wrapper.closest('.products-showcase') || wrapper.closest('.product-showcase');
   const updateRotate = () => {
     if (!section) return;
     const rect = section.getBoundingClientRect();
     const progress = Math.min(Math.max((window.innerHeight - rect.top) / (window.innerHeight + rect.height), 0), 1);
-    wrapper.style.setProperty('--rotate', progress.toFixed(4));
+    
+    // Snap to the nearest card step to mimic the CodePen steps() behavior
+    const maxIndex = total - 1;
+    const rotate = Math.round(progress * maxIndex) / total;
+    wrapper.style.setProperty('--rotate', rotate.toFixed(4));
+    
+    let activeIndex = -1;
+    let minPhaseDist = Infinity;
+    
+    cards.forEach((card, index) => {
+      let pos = (rotate - index / total + 1) % 1;
+      if (pos < 0) pos += 1;
+      const dist = Math.min(pos, 1 - pos);
+      
+      const grayscale = Math.max(0, Math.min(dist * total * 1.4, 1));
+      const opacity = 1 - (dist / 0.22);
+      
+      const focusRange = 0.1;
+      const maxBlur = 5;
+      const normDist = Math.min(dist, focusRange);
+      const blurProgress = normDist / focusRange;
+      const blur = blurProgress * maxBlur;
+      
+      const activeProgress = Math.max(0, Math.min(1 - (dist / 0.035), 1));
+      const scale = 0.58 + 0.72 * activeProgress;
+      
+      card.style.filter = `blur(${blur.toFixed(2)}px) grayscale(${grayscale.toFixed(3)})`;
+      card.style.opacity = Math.max(0.35, opacity).toFixed(3);
+      card.style.zIndex = Math.round(1 + activeProgress * 9);
+      
+      const inner = card.querySelector('.product-card-inner');
+      if (inner) {
+        inner.style.transform = `scale3d(${scale.toFixed(3)}, ${scale.toFixed(3)}, 1)`;
+      }
+      
+      if (dist < minPhaseDist) {
+        minPhaseDist = dist;
+        activeIndex = index;
+      }
+    });
+
+    if (activeIndex !== -1) {
+       const activeCard = cards[activeIndex];
+       const titleEl = document.getElementById('activeProductTitle');
+       const descEl = document.getElementById('activeProductDesc');
+       if (titleEl) titleEl.textContent = activeCard.dataset.title || '';
+       if (descEl) descEl.textContent = activeCard.dataset.desc || '';
+    }
   };
 
   window.addEventListener('scroll', updateRotate, { passive: true });
@@ -412,4 +459,167 @@
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+})();
+
+/* -- Bag scroll image sequence (scroll-scrub video) --- */
+(function initBagScrollSequence() {
+  const root       = document.querySelector('.bag-scroll-sequence');
+  const track      = document.getElementById('bagScrollTrack') || root?.querySelector('.bag-scroll-track');
+  const frameEl    = document.getElementById('bagScrollFrame') || root?.querySelector('canvas, img');
+  const progressEl = document.getElementById('bagScrollProgress') || root?.querySelector('.bag-scroll-progress-fill');
+
+  if (!root || !track || !frameEl) return;
+
+  const isCanvas = frameEl instanceof HTMLCanvasElement;
+  let ctx = null;
+  if (isCanvas) {
+    ctx = frameEl.getContext('2d');
+  }
+
+  const DEFAULT_FRAME_COUNT = 134;
+  const frameDir = (root.dataset.frameDir || 'images/bag-video-images/').trim();
+  const frameExt = (root.dataset.frameExt || 'webp').trim().replace(/^\./, '');
+
+  const frameCount = (() => {
+    const fromData = Number.parseInt(root.dataset.frameCount || '', 10);
+    return Number.isFinite(fromData) && fromData > 0 ? fromData : DEFAULT_FRAME_COUNT;
+  })();
+
+  root.style.setProperty('--bag-frames', String(frameCount));
+
+  const frameSrc = (index) =>
+    `${frameDir}${String(index + 1).padStart(5, '0')}.${frameExt}`;
+
+  const cache = new Array(frameCount);
+  let rafId = null;
+  let currentFrame = -1;
+  let preloadStarted = false;
+
+  const preloadFrames = () => {
+    if (preloadStarted) return;
+    preloadStarted = true;
+
+    for (let i = 0; i < frameCount; i++) {
+      const img = new Image();
+      img.decoding = 'async';
+      const idx = i;
+      img.onload = () => { cache[idx] = img; };
+      img.src = frameSrc(idx);
+    }
+  };
+
+  const setFrame = (index) => {
+    const clamped = Math.max(0, Math.min(frameCount - 1, index));
+    if (clamped === currentFrame) return;
+    currentFrame = clamped;
+
+    const cached = cache[clamped];
+    const srcToUse = cached?.src || frameSrc(clamped);
+
+    if (isCanvas) {
+      if (cached && cached.complete) {
+        ctx.clearRect(0, 0, frameEl.width, frameEl.height);
+        ctx.drawImage(cached, 0, 0, frameEl.width, frameEl.height);
+      } else {
+        const temp = new Image();
+        temp.onload = () => {
+          if (currentFrame === clamped) {
+            ctx.clearRect(0, 0, frameEl.width, frameEl.height);
+            ctx.drawImage(temp, 0, 0, frameEl.width, frameEl.height);
+          }
+        };
+        temp.src = srcToUse;
+      }
+    } else {
+      frameEl.src = srcToUse;
+    }
+  };
+
+  if (isCanvas) {
+    const initialImg = new Image();
+    initialImg.onload = () => {
+      if (currentFrame <= 0) {
+        ctx.clearRect(0, 0, frameEl.width, frameEl.height);
+        ctx.drawImage(initialImg, 0, 0, frameEl.width, frameEl.height);
+      }
+    };
+    initialImg.src = frameSrc(0);
+  }
+
+  const update = () => {
+    rafId = null;
+
+    const rect = track.getBoundingClientRect();
+    const scrollable = rect.height - window.innerHeight;
+    if (scrollable <= 0) return;
+
+    const scrolled = Math.max(0, -rect.top);
+    const progress = Math.min(scrolled / scrollable, 1);
+    const frameIndex = Math.round(progress * (frameCount - 1));
+
+    setFrame(frameIndex);
+    if (progressEl) progressEl.style.width = `${progress * 100}%`;
+  };
+
+  const onScroll = () => {
+    if (!rafId) rafId = requestAnimationFrame(update);
+  };
+
+  const canUseGSAP = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+
+  if (canUseGSAP) {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+
+    const state = { frame: 0 };
+    const scrubSetting = (() => {
+      const raw = root.dataset.scrub;
+      if (raw == null || raw === '') return true;
+      const n = Number.parseFloat(raw);
+      return Number.isFinite(n) && n >= 0 ? n : true;
+    })();
+
+    window.ScrollTrigger.create({
+      trigger: track,
+      start: 'top bottom',
+      once: true,
+      onEnter: preloadFrames
+    });
+
+    window.gsap.to(state, {
+      frame: frameCount - 1,
+      ease: 'none',
+      snap: { frame: 1 },
+      scrollTrigger: {
+        trigger: track,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: scrubSetting
+      },
+      onUpdate: () => {
+        const idx = Math.round(state.frame);
+        setFrame(idx);
+        if (progressEl) progressEl.style.width = `${(idx / (frameCount - 1)) * 100}%`;
+      }
+    });
+
+    window.ScrollTrigger.addEventListener('refresh', () => {
+      const idx = Math.round(state.frame);
+      setFrame(idx);
+    });
+
+    window.ScrollTrigger.refresh();
+  } else {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        preloadFrames();
+        observer.disconnect();
+      }
+    }, { rootMargin: '300px 0px' });
+
+    observer.observe(track);
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
 })();

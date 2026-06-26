@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280" fill="none">
+  <ellipse cx="100" cy="42" rx="72" ry="14" fill="#D4C4A8"/>
+  <path d="M35 42 L48 248 Q100 268 152 248 L165 42 Z" fill="#E8DCC8"/>
+  <path d="M35 42 L48 248 Q100 268 152 248 L165 42 Z" fill="url(#cupGrad)" opacity=".6"/>
+  <ellipse cx="100" cy="42" rx="72" ry="14" fill="#C9B99A"/>
+  <path d="M55 80 Q100 95 145 80" stroke="#B8A88A" stroke-width="2" fill="none" opacity=".5"/>
+  <path d="M58 120 Q100 135 142 120" stroke="#B8A88A" stroke-width="2" fill="none" opacity=".4"/>
+  <defs>
+    <linearGradient id="cupGrad" x1="100" y1="42" x2="100" y2="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F5EDE0"/>
+      <stop offset="100%" stop-color="#C4B49A"/>
+    </linearGradient>
+  </defs>
+</svg>

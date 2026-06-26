@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 200" fill="none">
+  <rect x="15" y="50" width="230" height="130" rx="12" fill="#E8DCC8"/>
+  <rect x="15" y="50" width="230" height="130" rx="12" fill="url(#trayGrad)" opacity=".4"/>
+  <rect x="25" y="60" width="95" height="55" rx="6" fill="#D4C4A8"/>
+  <rect x="130" y="60" width="105" height="55" rx="6" fill="#D4C4A8"/>
+  <rect x="25" y="125" width="210" height="45" rx="6" fill="#D4C4A8"/>
+  <rect x="15" y="50" width="230" height="130" rx="12" stroke="#B8A88A" stroke-width="1.5" fill="none"/>
+  <defs>
+    <linearGradient id="trayGrad" x1="130" y1="50" x2="130" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F5EDE0"/>
+      <stop offset="100%" stop-color="#C4B49A"/>
+    </linearGradient>
+  </defs>
+</svg>
