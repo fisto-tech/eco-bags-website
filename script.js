@@ -6,10 +6,10 @@
 
 /* ── Navbar ──────────────────────────────────────────── */
 (function initNavbar() {
-  const navbar    = document.getElementById('navbar');
+  const navbar = document.getElementById('navbar');
   const hamburger = document.getElementById('hamburger');
-  const navLinks  = document.getElementById('navLinks');
-  const links     = navLinks.querySelectorAll('.nav-link');
+  const navLinks = document.getElementById('navLinks');
+  const links = navLinks.querySelectorAll('.nav-link');
 
   // Scroll: tint navbar + highlight active link
   const onScroll = () => {
@@ -71,7 +71,7 @@
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      const el    = entry.target;
+      const el = entry.target;
       const delay = parseInt(el.dataset.delay || 0, 10);
 
       if (entry.isIntersecting) {
@@ -109,12 +109,12 @@
   if (aboutSection) sectionObs.observe(aboutSection);
 
   function animateCounter(el) {
-    const target   = parseInt(el.dataset.target, 10);
+    const target = parseInt(el.dataset.target, 10);
     const duration = 2000;
-    const steps    = 60;
+    const steps = 60;
     const increment = target / steps;
     let current = 0;
-    let step    = 0;
+    let step = 0;
 
     const easeOut = t => 1 - Math.pow(1 - t, 3);
 
@@ -136,7 +136,7 @@
 
 /* ── Testimonials Carousel ───────────────────────────── */
 (function initCarousel() {
-  const track  = document.getElementById('testimonialsTrack');
+  const track = document.getElementById('testimonialsTrack');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   const dotsWrap = document.getElementById('tDots');
@@ -248,7 +248,7 @@
 
 /* ── Contact Form ────────────────────────────────────── */
 (function initForm() {
-  const form    = document.getElementById('contactForm');
+  const form = document.getElementById('contactForm');
   const success = document.getElementById('formSuccess');
 
   if (!form) return;
@@ -257,9 +257,9 @@
     e.preventDefault();
 
     // Simple client-side validation
-    const name  = form.querySelector('#name').value.trim();
+    const name = form.querySelector('#name').value.trim();
     const email = form.querySelector('#email').value.trim();
-    const msg   = form.querySelector('#message').value.trim();
+    const msg = form.querySelector('#message').value.trim();
     const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!name || !email || !msg) {
@@ -351,29 +351,31 @@
 })();
 
 
-/* ── Parallax Hero ───────────────────────────────────── */
-(function initParallax() {
-  const hero   = document.querySelector('.hero');
-  const leaves = document.querySelectorAll('.leaf');
-  const shapes = document.querySelectorAll('.shape');
+/* ── Hero Split Reveal ───────────────────────────────── */
+(function initHeroSplitReveal() {
+  const hero = document.querySelector('.hero');
+  if (!hero || typeof window.gsap === 'undefined' || typeof window.ScrollTrigger === 'undefined') return;
 
-  if (!hero) return;
+  window.gsap.registerPlugin(window.ScrollTrigger);
 
-  const onScroll = () => {
-    const scrollY = window.scrollY;
-    if (scrollY > window.innerHeight) return;
+  // Entrance animation for load (targets wrapper to avoid conflicting with ScrollTrigger start states)
+  window.gsap.from('.hero-content', { opacity: 0, y: 30, duration: 1.2, ease: 'power3.out', delay: 0.2 });
 
-    leaves.forEach((leaf, i) => {
-      const speed = (i % 2 === 0 ? 0.08 : 0.05);
-      leaf.style.transform = `translateY(${scrollY * speed}px) rotate(${scrollY * .02}deg)`;
-    });
-    shapes.forEach((shape, i) => {
-      const speed = 0.06 + i * 0.02;
-      shape.style.transform = `translateY(${scrollY * speed}px)`;
-    });
-  };
+  const tl = window.gsap.timeline({
+    scrollTrigger: {
+      trigger: hero,
+      start: 'top top',
+      end: '+=150%',
+      pin: true,
+      pinSpacing: false,
+      scrub: true
+    }
+  });
 
-  window.addEventListener('scroll', onScroll, { passive: true });
+  tl.to('.hero-bg-left', { xPercent: -100, ease: 'power1.inOut' }, 0)
+    .to('.hero-bg-right', { xPercent: 100, ease: 'power1.inOut' }, 0)
+    .to('.hero-anim-left', { xPercent: -150, opacity: 0, ease: 'power1.inOut' }, 0)
+    .to('.hero-scroll', { y: 50, opacity: 0, ease: 'power1.inOut' }, 0);
 })();
 
 /* ── Product gallery scroll rotation ─────────────────── */
@@ -392,42 +394,48 @@
   const updateRotate = () => {
     if (!section) return;
     const rect = section.getBoundingClientRect();
-    const progress = Math.min(Math.max((window.innerHeight - rect.top) / (window.innerHeight + rect.height), 0), 1);
-    
+    const scrolledPastTop = -rect.top;
+    const scrollableDistance = rect.height - window.innerHeight;
+    let progress = 0;
+    if (scrollableDistance > 0) {
+      progress = scrolledPastTop / scrollableDistance;
+    }
+    progress = Math.min(Math.max(progress, 0), 1);
+
     // Snap to the nearest card step to mimic the CodePen steps() behavior
     const maxIndex = total - 1;
     const rotate = Math.round(progress * maxIndex) / total;
     wrapper.style.setProperty('--rotate', rotate.toFixed(4));
-    
+
     let activeIndex = -1;
     let minPhaseDist = Infinity;
-    
+
     cards.forEach((card, index) => {
       let pos = (rotate - index / total + 1) % 1;
       if (pos < 0) pos += 1;
       const dist = Math.min(pos, 1 - pos);
-      
+
       const grayscale = Math.max(0, Math.min(dist * total * 1.4, 1));
       const opacity = 1 - (dist / 0.22);
-      
+
       const focusRange = 0.1;
       const maxBlur = 5;
       const normDist = Math.min(dist, focusRange);
       const blurProgress = normDist / focusRange;
       const blur = blurProgress * maxBlur;
-      
+
       const activeProgress = Math.max(0, Math.min(1 - (dist / 0.035), 1));
       const scale = 0.58 + 0.72 * activeProgress;
-      
+
       card.style.filter = `blur(${blur.toFixed(2)}px) grayscale(${grayscale.toFixed(3)})`;
       card.style.opacity = Math.max(0.35, opacity).toFixed(3);
       card.style.zIndex = Math.round(1 + activeProgress * 9);
-      
+
       const inner = card.querySelector('.product-card-inner');
       if (inner) {
         inner.style.transform = `scale3d(${scale.toFixed(3)}, ${scale.toFixed(3)}, 1)`;
       }
-      
+
       if (dist < minPhaseDist) {
         minPhaseDist = dist;
         activeIndex = index;
@@ -435,11 +443,11 @@
     });
 
     if (activeIndex !== -1) {
-       const activeCard = cards[activeIndex];
-       const titleEl = document.getElementById('activeProductTitle');
-       const descEl = document.getElementById('activeProductDesc');
-       if (titleEl) titleEl.textContent = activeCard.dataset.title || '';
-       if (descEl) descEl.textContent = activeCard.dataset.desc || '';
+      const activeCard = cards[activeIndex];
+      const titleEl = document.getElementById('activeProductTitle');
+      const descEl = document.getElementById('activeProductDesc');
+      if (titleEl) titleEl.textContent = activeCard.dataset.title || '';
+      if (descEl) descEl.textContent = activeCard.dataset.desc || '';
     }
   };
 
@@ -452,8 +460,8 @@
 (function smoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
-      const id  = a.getAttribute('href').slice(1);
-      const el  = id ? document.getElementById(id) : null;
+      const id = a.getAttribute('href').slice(1);
+      const el = id ? document.getElementById(id) : null;
       if (!el) return;
       e.preventDefault();
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -463,9 +471,9 @@
 
 /* -- Bag scroll image sequence (scroll-scrub video) --- */
 (function initBagScrollSequence() {
-  const root       = document.querySelector('.bag-scroll-sequence');
-  const track      = document.getElementById('bagScrollTrack') || root?.querySelector('.bag-scroll-track');
-  const frameEl    = document.getElementById('bagScrollFrame') || root?.querySelector('canvas, img');
+  const root = document.querySelector('.bag-scroll-sequence');
+  const track = document.getElementById('bagScrollTrack') || root?.querySelector('.bag-scroll-track');
+  const frameEl = document.getElementById('bagScrollFrame') || root?.querySelector('canvas, img');
   const progressEl = document.getElementById('bagScrollProgress') || root?.querySelector('.bag-scroll-progress-fill');
 
   if (!root || !track || !frameEl) return;
