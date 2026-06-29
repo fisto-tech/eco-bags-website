@@ -383,9 +383,20 @@
   const wrapper = document.getElementById('productGallery');
   if (!wrapper) return;
 
+  const originalCards = Array.from(wrapper.children);
+  const uniqueCards = originalCards.length;
+  
+  // Clone cards twice to create 15 cards for a seamless infinite loop
+  for (let i = 0; i < 2; i++) {
+    originalCards.forEach(card => {
+      wrapper.appendChild(card.cloneNode(true));
+    });
+  }
+
   const cards = Array.from(wrapper.children);
   const total = cards.length;
-  wrapper.style.setProperty('--cards', total);
+  const spacingFactor = total; // 15
+  wrapper.style.setProperty('--cards', spacingFactor);
   cards.forEach((card, index) => {
     card.style.setProperty('--card-i', index + 1);
   });
@@ -403,15 +414,15 @@
     progress = Math.min(Math.max(progress, 0), 1);
 
     // Snap to the nearest card step to mimic the CodePen steps() behavior
-    const maxIndex = total - 1;
-    const rotate = Math.round(progress * maxIndex) / total;
+    const maxIndex = uniqueCards - 1; // 4
+    const rotate = Math.round(progress * maxIndex) / spacingFactor;
     wrapper.style.setProperty('--rotate', rotate.toFixed(4));
 
     let activeIndex = -1;
     let minPhaseDist = Infinity;
 
     cards.forEach((card, index) => {
-      let pos = (rotate - index / total + 1) % 1;
+      let pos = (rotate - index / spacingFactor + 1) % 1;
       if (pos < 0) pos += 1;
       const dist = Math.min(pos, 1 - pos);
 
@@ -448,6 +459,15 @@
       const descEl = document.getElementById('activeProductDesc');
       if (titleEl) titleEl.textContent = activeCard.dataset.title || '';
       if (descEl) descEl.textContent = activeCard.dataset.desc || '';
+      
+      const displayIndex = (activeIndex % uniqueCards) + 1;
+      const productCurrent = document.getElementById('productCurrent');
+      const productTotal = document.getElementById('productTotal');
+      const productProgressFill = document.getElementById('productProgressFill');
+      
+      if (productCurrent) productCurrent.textContent = String(displayIndex).padStart(2, '0');
+      if (productTotal) productTotal.textContent = String(uniqueCards).padStart(2, '0');
+      if (productProgressFill) productProgressFill.style.width = `${(displayIndex / uniqueCards) * 100}%`;
     }
   };
 

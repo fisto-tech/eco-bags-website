@@ -954,11 +954,11 @@ button {
   --card-width: clamp(120px, 18vw, 220px);
   --card-height: var(--card-width);
   --radius-raw: calc(var(--card-width) * var(--cards) / (2 * 3.1416));
-  --radius: min(var(--radius-raw), clamp(130px, 24vmin, 210px));
+  --radius: min(var(--radius-raw), clamp(300px, 65vmin, 1200px));
   --wheel-shift: calc(var(--radius) + var(--card-width) * 0.42);
 
   position: absolute;
-  top: 50%;
+  top: 72%;
   left: 50%;
   width: calc(var(--radius) * 2 + var(--card-width));
   height: calc(var(--radius) * 2 + var(--card-width));
@@ -988,7 +988,7 @@ button {
   top: 0;
   left: 0;
   width: var(--card-width);
-  aspect-ratio: 1;
+  aspect-ratio: 0.72;
   z-index: calc(1 + var(--card-active) * 9);
 
   offset-path: circle(var(--radius) at 50% 50%);
@@ -1002,14 +1002,17 @@ button {
 }
 
 .product-card-inner {
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  border-radius: 14px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.55);
+  background: white;
+
+  box-sizing: border-box;
   transition: transform 300ms ease-in-out;
   will-change: transform;
   animation: productFloat 4.5s ease-in-out infinite;
@@ -1018,14 +1021,15 @@ button {
 }
 
 .product-card-inner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
+
+
+  border-radius: 0;
   display: block;
   pointer-events: none;
   user-select: none;
 }
+
+
 
 @keyframes productFloat {
 
