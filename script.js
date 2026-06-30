@@ -4,6 +4,24 @@
 
 'use strict';
 
+/* ── Preloader ───────────────────────────────────────── */
+const preloaderStartTime = Date.now();
+window.addEventListener('load', () => {
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+    const minPreloadTime = 2500; // Minimum 2.5 seconds
+    const elapsedTime = Date.now() - preloaderStartTime;
+    const remainingTime = Math.max(0, minPreloadTime - elapsedTime);
+
+    setTimeout(() => {
+      preloader.classList.add('hidden');
+      setTimeout(() => {
+        preloader.remove();
+      }, 600); // Matches CSS transition
+    }, remainingTime);
+  }
+});
+
 /* ── Navbar ──────────────────────────────────────────── */
 (function initNavbar() {
   const navbar = document.getElementById('navbar');

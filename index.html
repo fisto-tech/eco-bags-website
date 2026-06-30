@@ -9,6 +9,7 @@
   <meta name="keywords"
     content="eco-friendly packaging, food containers, biodegradable bags, sustainable packaging, kraft bags" />
   <title>GreenWrap – Sustainable Packaging Solutions</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -21,6 +22,16 @@
 </head>
 
 <body>
+
+  <!-- ===== PRELOADER ===== -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-bag">
+        <span class="material-symbols-rounded preloader-leaf">eco</span>
+      </div>
+      <div class="preloader-text">GreenWrap</div>
+    </div>
+  </div>
 
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar" id="navbar">
@@ -51,17 +62,14 @@
     </div>
     <div class="hero-bg-half hero-bg-right">
       <video class="hero-bg-video-split video-right" autoplay muted loop playsinline preload="auto">
-        <source src="images/Eco-friendly_paper_bags.mp4" type="video/mp4" />
+        <source src="images/Eco-friendly_paper_bags-new.mp4" type="video/mp4" />
       </video>
       
     </div>
 
       <div class="hero-content">
         <div class="hero-text hero-anim-left">
-          <div class="hero-badge">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
-            Premium & Eco-Friendly
-          </div>
+          
           <h1 class="hero-heading">
             Sustainable Packaging<br />
             <span class="hero-highlight">for a Greener Future</span>
@@ -71,20 +79,10 @@
           </p>
           <div class="hero-actions">
             <a href="#products" class="btn btn-primary">View Products</a>
-            <a href="#contact" class="btn btn-outline">Contact Us</a>
+          
           </div>
           
-          <div class="hero-features-list">
-            <div class="hero-feature-item">
-              <span class="feature-check">✓</span> 100% Biodegradable
-            </div>
-            <div class="hero-feature-item">
-              <span class="feature-check">✓</span> Premium Kraft Paper
-            </div>
-            <div class="hero-feature-item">
-              <span class="feature-check">✓</span> Fully Customizable
-            </div>
-          </div>
+         
         </div>
       </div>
 
@@ -167,48 +165,47 @@
       <div class="showcase-sticky">
         <header class="showcase-header">
           <h2 class="showcase-title">Our Products</h2>
-          <p class="showcase-subtitle"><em>Premium Sustainable Food Packaging Solutions</em></p>
+
         </header>
 
         <div class="showcase-wheel">
           <div class="wrapper" id="productGallery">
-            <div class="product-card" data-title="Paper Cups"
-              data-desc="FSC-certified double-wall paper cups with compostable PLA lining. Perfect for hot beverages, cafés, and juice bars.">
+            <div class="product-card" data-title="Standard Kraft Bags"
+              data-desc="Durable, unbleached kraft paper bags with sturdy twisted handles. Perfect for retail, groceries, and everyday eco-friendly carry.">
               <div class="product-card-inner">
-                <img src="images/products/product-1.webp" alt="Paper Cups" width="600" height="600" loading="lazy" />
+                <img src="images/products/product-1.webp" alt="Standard Kraft Bags" width="600" height="600" loading="lazy" />
               </div>
             </div>
-            <div class="product-card" data-title="Paper Bowls"
-              data-desc="Leak-resistant kraft paper bowls with aqueous coating. Ideal for soups, salads, and grain bowls on the go.">
+            <div class="product-card" data-title="Flat Handle Bags"
+              data-desc="Reliable and cost-effective carry bags featuring comfortable flat paper handles. Ideal for takeaways, restaurants, and quick service.">
               <div class="product-card-inner">
-                <img src="images/products/product-2.webp" alt="Paper Bowls" width="600" height="600" loading="lazy" />
+                <img src="images/products/product-2.webp" alt="Flat Handle Bags" width="600" height="600" loading="lazy" />
               </div>
             </div>
-            <div class="product-card" data-title="Burger Boxes"
-              data-desc="Grease-proof clamshell burger boxes made from unbleached kraft. Keeps food fresh while staying fully compostable.">
+            <div class="product-card" data-title="SOS Grocery Bags"
+              data-desc="Self-opening sack bags designed with a block bottom to stand upright. A versatile, handle-less option for bakeries and bulk food items.">
               <div class="product-card-inner">
-                <img src="images/products/product-3.webp" alt="Burger Boxes" width="600" height="600" loading="lazy" />
+                <img src="images/products/product-3.webp" alt="SOS Grocery Bags" width="600" height="600" loading="lazy" />
               </div>
             </div>
-            <div class="product-card" data-title="Meal Trays"
-              data-desc="Multi-compartment bagasse meal trays for catering and cloud kitchens. Microwave-safe and sturdy for hearty portions.">
+            <div class="product-card" data-title="Window Bakery Bags"
+              data-desc="Kraft bags featuring a clear, fully compostable PLA window. The perfect way to securely carry and showcase fresh artisanal baked goods.">
               <div class="product-card-inner">
-                <img src="images/products/product-4.webp" alt="Meal Trays" width="600" height="600" loading="lazy" />
+                <img src="images/products/product-4.webp" alt="Window Bakery Bags" width="600" height="600" loading="lazy" />
               </div>
             </div>
-            <div class="product-card" data-title="Carry Bags"
-              data-desc="Reinforced kraft carry bags with twisted paper handles. A premium, plastic-free alternative for retail and delivery.">
+            <div class="product-card" data-title="Premium Boutique Bags"
+              data-desc="Heavyweight paper carry bags with reinforced bottoms and elegant die-cut handles. A luxurious, sustainable choice for premium retail.">
               <div class="product-card-inner">
-                <img src="images/products/product-5.webp" alt="Carry Bags" width="600" height="600" loading="lazy" />
+                <img src="images/products/product-5.webp" alt="Premium Boutique Bags" width="600" height="600" loading="lazy" />
               </div>
             </div>
           </div>
         </div>
 
         <div class="showcase-info" id="showcaseInfo">
-          <h3 class="showcase-product-title" id="activeProductTitle">Paper Cups</h3>
-          <p class="showcase-product-desc" id="activeProductDesc">FSC-certified double-wall paper cups with compostable
-            PLA lining. Perfect for hot beverages, cafés, and juice bars.</p>
+          <h3 class="showcase-product-title" id="activeProductTitle">Standard Kraft Bags</h3>
+          <p class="showcase-product-desc" id="activeProductDesc">Durable, unbleached kraft paper bags with sturdy twisted handles. Perfect for retail, groceries, and everyday eco-friendly carry.</p>
           <a href="#contact" class="btn btn-showcase">Explore Product</a>
         </div>
 

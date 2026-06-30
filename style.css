@@ -92,6 +92,89 @@ button {
   font-family: var(--font);
 }
 
+/* ============================
+   PRELOADER
+   ============================ */
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: var(--off-white);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.preloader-bag {
+  position: relative;
+  width: 50px;
+  height: 60px;
+  border: 3px solid var(--green-600);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(45, 201, 102, 0.05);
+  animation: bagBounce 1.8s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.preloader-bag::before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 16px;
+  border: 3px solid var(--green-600);
+  border-bottom: none;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.preloader-leaf {
+  color: var(--green-500);
+  font-size: 2rem;
+  animation: leafGrow 1.8s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.preloader-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--green-900);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  animation: textPulse 1.8s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes bagBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes leafGrow {
+  0%, 100% { transform: scale(0.7); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+@keyframes textPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
 /* ── Utility ───────────────────────────────────────────── */
 .container {
   max-width: 1200px;
@@ -257,7 +340,7 @@ button {
 .nav-link {
   font-size: clamp(.9rem, .95vw, 1rem);
   font-weight: 500;
-  color: var(--grey-800);
+  color: var(--white);
   position: relative;
   transition: color .3s;
 }
@@ -1896,6 +1979,45 @@ button {
 
 [data-anim="scale-in"].out-view {
   transform: scale(.88);
+}
+
+/* --- Hero Desktop VW Scaling --- */
+@media (min-width: 1025px) {
+  .hero {
+    padding-top: 5vw;
+  }
+  .hero-content {
+    max-width: 100vw;
+    padding: 0 5vw;
+    gap: 3vw;
+  }
+  .hero-heading {
+    font-size: 4.5vw;
+    margin-bottom: 1.25vw;
+  }
+  .hero-sub {
+    font-size: 1.1vw;
+    max-width: 30vw;
+    margin-bottom: 2.5vw;
+  }
+  .hero-actions {
+    gap: 1vw;
+    margin-bottom: 2.5vw;
+  }
+  .hero-actions .btn {
+    font-size: 1vw;
+    padding: 0.85vw 2vw;
+    border-radius: 5vw;
+  }
+  .hero-scroll {
+    bottom: 2.5vw;
+    gap: 0.5vw;
+    font-size: 1vw;
+  }
+  .scroll-dot {
+    width: 0.4vw;
+    height: 0.4vw;
+  }
 }
 
 /* ============================
