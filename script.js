@@ -403,7 +403,7 @@ window.addEventListener('load', () => {
 
   const originalCards = Array.from(wrapper.children);
   const uniqueCards = originalCards.length;
-  
+
   // Clone cards twice to create 15 cards for a seamless infinite loop
   for (let i = 0; i < 2; i++) {
     originalCards.forEach(card => {
@@ -477,12 +477,12 @@ window.addEventListener('load', () => {
       const descEl = document.getElementById('activeProductDesc');
       if (titleEl) titleEl.textContent = activeCard.dataset.title || '';
       if (descEl) descEl.textContent = activeCard.dataset.desc || '';
-      
+
       const displayIndex = (activeIndex % uniqueCards) + 1;
       const productCurrent = document.getElementById('productCurrent');
       const productTotal = document.getElementById('productTotal');
       const productProgressFill = document.getElementById('productProgressFill');
-      
+
       if (productCurrent) productCurrent.textContent = String(displayIndex).padStart(2, '0');
       if (productTotal) productTotal.textContent = String(uniqueCards).padStart(2, '0');
       if (productProgressFill) productProgressFill.style.width = `${(displayIndex / uniqueCards) * 100}%`;
