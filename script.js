@@ -669,3 +669,39 @@ window.addEventListener('load', () => {
     update();
   }
 })();
+
+/* ── Hero Door Opening Reveal Animation ───────────────────────── */
+(function initHeroScrollAnimation() {
+  const hero = document.querySelector('.hero');
+  const bgLeft = document.querySelector('.hero-bg-left');
+  const bgRight = document.querySelector('.hero-bg-right');
+  const text = document.querySelector('.hero-text');
+  const scrollIndicator = document.querySelector('.hero-scroll');
+  
+  // Only run on desktop screens
+  if (window.innerWidth < 1025) return;
+  
+  if (!hero || !bgLeft || !bgRight || typeof window.gsap === 'undefined' || typeof window.ScrollTrigger === 'undefined') return;
+
+  const tl = window.gsap.timeline({
+    scrollTrigger: {
+      trigger: '.bag-scroll-track',
+      start: 'top top',
+      end: '+=100%',
+      scrub: true
+    }
+  });
+
+  tl.to(bgLeft, { xPercent: -100, ease: 'none' }, 0)
+    .to(bgRight, { xPercent: 100, ease: 'none' }, 0);
+    
+  if (text) {
+    tl.to(text, { x: '-50vw', ease: 'none' }, 0);
+  }
+    
+  if (scrollIndicator) {
+    tl.to(scrollIndicator, { opacity: 0, ease: 'none' }, 0);
+  }
+  
+  window.ScrollTrigger.refresh();
+})();

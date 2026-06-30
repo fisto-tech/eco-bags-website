@@ -436,7 +436,9 @@ button {
    HERO
    ============================ */
 .hero {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   z-index: 10;
   min-height: 100vh;
@@ -2019,6 +2021,9 @@ button {
 /* --- Hero Desktop VW Scaling --- */
 @media (min-width: 1025px) {
   .hero {
+    position: sticky;
+    top: 0;
+    margin-bottom: -100vh;
     padding-top: 5vw;
   }
 
